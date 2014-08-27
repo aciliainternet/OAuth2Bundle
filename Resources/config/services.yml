@@ -1,0 +1,6 @@
+parameters:
+
+services:
+    acilia.oauth2:
+        class: Acilia\Bundle\OAuth2Bundle\Service\OAuth2Service
+        arguments: [@router, @event_dispatcher]

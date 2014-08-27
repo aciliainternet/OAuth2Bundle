@@ -1,4 +1,3 @@
-OAuth2Bundle
-============
+#OAuth2Bundle
 
-Bundle for OAuth2 Authentication.
+Acilia OAuth Bundle for Symfony2
