@@ -8,7 +8,7 @@ services:
 
     # OAuth2 Twig Extensions
     acilia.oauth.twig_extension:
-        class: Acilia\OAuth2Bundle\Library\Twig\Extension\OAuth2Extension
+        class: Acilia\Bundle\OAuth2Bundle\Library\Twig\Extension\OAuth2Extension
         arguments: [@acilia.oauth2]
         tags:
             - { name: twig.extension }
