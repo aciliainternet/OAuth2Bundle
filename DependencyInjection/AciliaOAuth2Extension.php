@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class AciliaOAuth2BundleExtension extends Extension
+class AciliaOAuth2Extension extends Extension
 {
     /**
      * {@inheritDoc}
