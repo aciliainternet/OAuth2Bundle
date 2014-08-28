@@ -5,6 +5,7 @@ use Acilia\Bundle\OAuth2Bundle\Library\OAuth2\Provider\ProviderAbstract;
 use Acilia\Bundle\OAuth2Bundle\Library\OAuth2\Configuration\ConfigurationInterface;
 use Acilia\Bundle\OAuth2Bundle\Library\OAuth2\Configuration\FacebookConfiguration;
 use Acilia\Bundle\OAuth2Bundle\Library\OAuth2\UserData\FacebookUserData;
+use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 
 class FacebookProvider extends ProviderAbstract
@@ -35,8 +36,28 @@ class FacebookProvider extends ProviderAbstract
         $graphUrl = 'https://graph.facebook.com/me?access_token=' . $parameters['access_token'];
         $data = json_decode(file_get_contents($graphUrl), true);
 
+        // Get User Avatar
+        $avatarData = json_decode(file_get_contents('http://graph.facebook.com/v2.1/' . $data['id'] . '/picture?redirect=false&type=large'), true);
+        if ($avatarData['data']['is_silhouette'] == false) {
+            $data['avatar'] = $avatarData['data']['url'];
+        }
+
+        // Fix birthday
+        if (isset($data['birthday'])) {
+            if (strlen($data['birthday']) - strlen(str_replace('/', '', $data['birthday'])) == 3) {
+                $data['birthday'] = strtotime($data['birthday']);
+                if ($data['birthday']) {
+                    $data['birthday'] = date('Y-m-d', $data['birthday']);
+                } else {
+                    unset($data['birthday']);
+                }
+            } else {
+                unset($data['birthday']);
+            }
+        }
+
         $userData = new FacebookUserData();
-        $userData->setData($data);
+        $userData->setData(new ParameterBag($data));
 
         return $userData;
     }
