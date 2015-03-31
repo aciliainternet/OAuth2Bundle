@@ -1,32 +1,31 @@
 <?php
 namespace Acilia\Bundle\OAuth2Bundle\Library\Twig\Extension;
 
-
 use Acilia\Bundle\OAuth2Bundle\Service\OAuth2Service;
 
 class OAuth2Extension extends \Twig_Extension
 {
     protected $oauth2;
 
-	public function __construct(OAuth2Service $oauth2)
-	{
+    public function __construct(OAuth2Service $oauth2)
+    {
         $this->oauth2 = $oauth2;
-	}
+    }
 
-	public function getFunctions()
-	{
-		return [
+    public function getFunctions()
+    {
+        return [
             'get_oauth2_link' => new \Twig_Function_Method($this, 'getOauth2Link'),
-		];
-	}
+        ];
+    }
 
     public function getOauth2Link($provider)
     {
         return $this->oauth2->getLink($provider);
     }
 
-	public function getName()
-	{
-		return 'acilia_oauth2_bundle';
-	}
+    public function getName()
+    {
+        return 'acilia_oauth2_bundle';
+    }
 }

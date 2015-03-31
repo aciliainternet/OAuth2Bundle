@@ -2,4 +2,3 @@
 acilia_oauth2_bundle_callback:
     pattern:  /acilia-oauth2/{provider}
     defaults: { _controller: AciliaOAuth2Bundle:OAuth2:callback }
-

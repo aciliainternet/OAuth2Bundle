@@ -57,11 +57,10 @@ class OAuth2Service
         if (class_exists($providerClass)) {
             $providerInstance = new $providerClass;
 
-            if ($providerInstance instanceOf ProviderAbstract) {
+            if ($providerInstance instanceof ProviderAbstract) {
                 if (!isset($this->configuration[$providerInstance->getName()])) {
                     throw new Exception('No configuration found for provider');
-
-                } else if (!$providerInstance->supportsConfiguration($this->configuration[$providerInstance->getName()])) {
+                } elseif (!$providerInstance->supportsConfiguration($this->configuration[$providerInstance->getName()])) {
                     throw new Exception('Invalid configuration for provider');
                 } else {
                     $providerInstance->setConfiguration($this->configuration[$providerInstance->getName()]);

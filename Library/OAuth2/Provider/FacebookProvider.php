@@ -19,7 +19,7 @@ class FacebookProvider extends ProviderAbstract
 
     public function supportsConfiguration(ConfigurationInterface $configuration)
     {
-        return $configuration instanceOf FacebookConfiguration;
+        return $configuration instanceof FacebookConfiguration;
     }
 
     public function auth(Request $request, $callbackUrl)
