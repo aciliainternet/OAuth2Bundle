@@ -15,7 +15,7 @@ class OAuth2Extension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            'get_oauth2_link' => new \Twig_Function_Method($this, 'getOauth2Link'),
+            new \Twig_SimpleFunction('get_oauth2_link', [$this, 'getOauth2Link']),
         ];
     }
 
