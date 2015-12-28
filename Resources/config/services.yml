@@ -4,11 +4,11 @@ services:
     # OAuth2 Service
     acilia.oauth2:
         class: Acilia\Bundle\OAuth2Bundle\Service\OAuth2Service
-        arguments: [@router, @event_dispatcher]
+        arguments: ["@router", "@event_dispatcher"]
 
     # OAuth2 Twig Extensions
     acilia.oauth.twig_extension:
         class: Acilia\Bundle\OAuth2Bundle\Library\Twig\Extension\OAuth2Extension
-        arguments: [@acilia.oauth2]
+        arguments: ["@acilia.oauth2"]
         tags:
             - { name: twig.extension }
