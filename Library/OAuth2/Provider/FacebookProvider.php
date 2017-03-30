@@ -29,9 +29,7 @@ class FacebookProvider extends ProviderAbstract
              . '&redirect_uri=' . urlencode($callbackUrl)
              . '&client_secret=' . $this->configuration->getAppSecret()
              . '&code=' . $request->query->get('code');
-
-        $parameters = [];
-        parse_str(file_get_contents($url), $parameters);
+        $parameters = json_decode(file_get_contents($url), true);
 
         $graphUrl = 'https://graph.facebook.com/me?access_token=' . $parameters['access_token'];
         $data = json_decode(file_get_contents($graphUrl), true);
