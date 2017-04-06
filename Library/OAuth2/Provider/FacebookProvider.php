@@ -35,7 +35,7 @@ class FacebookProvider extends ProviderAbstract
         $data = json_decode(file_get_contents($graphUrl), true);
 
         // Get User Avatar
-        $avatarData = json_decode(file_get_contents('http://graph.facebook.com/v2.1/' . $data['id'] . '/picture?redirect=false&type=large'), true);
+        $avatarData = json_decode(file_get_contents('http://graph.facebook.com/v2.8/' . $data['id'] . '/picture?redirect=false&type=large'), true);
         if ($avatarData['data']['is_silhouette'] == false) {
             $data['avatar'] = $avatarData['data']['url'];
         }
