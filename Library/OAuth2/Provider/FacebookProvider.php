@@ -24,18 +24,18 @@ class FacebookProvider extends ProviderAbstract
 
     public function auth(Request $request, $callbackUrl)
     {
-        $url = 'https://graph.facebook.com/oauth/access_token?'
+        $url = 'https://graph.facebook.com/v2.8/oauth/access_token?'
              . 'client_id=' . $this->configuration->getAppId()
              . '&redirect_uri=' . urlencode($callbackUrl)
              . '&client_secret=' . $this->configuration->getAppSecret()
              . '&code=' . $request->query->get('code');
         $parameters = json_decode(file_get_contents($url), true);
 
-        $graphUrl = 'https://graph.facebook.com/me?access_token=' . $parameters['access_token'];
+        $graphUrl = 'https://graph.facebook.com/v2.8/me?access_token=' . $parameters['access_token'];
         $data = json_decode(file_get_contents($graphUrl), true);
 
         // Get User Avatar
-        $avatarData = json_decode(file_get_contents('http://graph.facebook.com/v2.1/' . $data['id'] . '/picture?redirect=false&type=large'), true);
+        $avatarData = json_decode(file_get_contents('http://graph.facebook.com/v2.8/' . $data['id'] . '/picture?redirect=false&type=large'), true);
         if ($avatarData['data']['is_silhouette'] == false) {
             $data['avatar'] = $avatarData['data']['url'];
         }
